@@ -21,10 +21,42 @@
 #
 ##SOF##
 
+#batch-like goto function
 ##GOTO
-label="$input";
-cmd=$(sed -n "/$label:/{:a;n;p;ba};" $0 | grep -v ':$');
-eval "$cmd" && exit $?;
+label="$input" ;
+cmd=$(sed -n "/$label:/{:a;n;p;ba};" $0 | grep -v ':$') ;
+eval "$cmd" && exit $? ;
 ##;;##
+
+#Bubble Sort Algorithm
+##bubblesort
+list2="$input" ;
+list=($list2) ;
+length=0 ;
+for each in $list2; do
+	(( length+=1 )) ;
+done ;
+i=0 ;
+i3=0 ;
+i2=1 ;
+while [[ $i -lt $length ]]; do
+	builtin let max=length-i-1 ;
+	while [[ $i2 -le $max ]]; do
+		if [[ ${list[$i3]} -gt ${list[$i2]} ]]; then
+			left=${list[$i3]} ;
+			list[$i3]=${list[$i2]} ;
+			list[$i2]=$left ;
+		fi ;
+		(( i2+=1 )) ;
+		(( i3+=1 )) ;
+	done ;
+	(( i+=1 )) ;
+	i3=0 ;
+	i2=1 ;
+done ;
+OUTPUT0="${list[@]}" ;
+##;;##
+
+##EOF##
 
 ##EOF##
